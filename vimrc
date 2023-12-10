@@ -42,7 +42,7 @@ set showcmd
 set nohlsearch
 
 " Use case insensitive search, except when using capital letters
-set ignorecase
+"set ignorecase
 set smartcase
 
 " Allow backspacing over autoindent, line breaks and start of insert action
@@ -51,7 +51,7 @@ set backspace=indent,eol,start
 " When opening a new line and no filetype-specific indenting is enabled, keep
 " the same indent as the line you're currently on. Useful for READMEs, etc.
 set autoindent
-set smartindent
+"set smartindent
 
 " Stop certain movements from always going to the first character of a line.
 " While this behaviour deviates from that of Vi, it does what most users
@@ -95,6 +95,10 @@ set notimeout ttimeout ttimeoutlen=200
 " Use <F11> to toggle between 'paste' and 'nopaste'
 set pastetoggle=<F11>
 
+" vim GUI TAB name display format
+" set guitablabel=%N\ %f
+set guitablabel=%N\ %t
+
 
 "------------------------------------------------------------
 " Indentation options {{{1
@@ -127,7 +131,7 @@ map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
 
 set noerrorbells
-set statusline+=%F
+"set statusline+=%F
 set clipboard=unnamed
 
 set nu
@@ -152,32 +156,22 @@ if has("gui_running")
   endif
 endif
 
-packloadall
+"command for vim8+ only
+""packloadall
 
 "sections-----------------------
 "       Color Scheme        
 "-------------------------------
-
-" Set a Color Scheme 
-set background=dark
-colorscheme murphy
-
 " Dont Wrap Long Lines
-set nowrap
+"set nowrap
+set wrap
 
 
 "Setting the color scheme. using inbuilt schemes
 
 set background=dark
-colorscheme murphy
-
-""To check available colorschemes use :colorschem <space> <ctrl+d>
-
-"-------------------------------
-"       NERD Treee
-"-------------------------------
-" Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
+colorscheme morning 
+""colorscheme desert 
 
 
 "-------------------------------
@@ -208,3 +202,49 @@ function! AutoHighlightToggle()
 endfunction
 
 
+
+call plug#begin()
+
+	"-------------------------------
+	"   SystemVerilog.vim plugin 
+	"-------------------------------
+	" plugin from nachumk git by Noah Kanovsky
+
+	    Plug 'vhda/verilog_systemverilog.vim'
+
+	"-------------------------------
+	"       NERD Treee
+	"-------------------------------
+	" Start NERDTree and put the cursor back in the other window.
+	""Windows command
+	""autocmd VimEnter * NERDTree | wincmd p
+
+	"Linux command
+	"call plug#begin()
+
+	    Plug 'preservim/nerdtree'
+        ""Plug 'dzeban/vim-log-syntax'
+        Plug 'andreshazard/vim-logreview'
+	"call plug#end()
+
+
+
+call plug#end()
+
+"""autocmd VimEnter * NERDTree
+
+
+"""""""This stuff is previously added""""""
+"""Turn on syntax highlighting
+""syntax on
+"""Enable filetype detection
+""filetype plugin indent on
+
+"Enable folding based on indent (on 8.0 and greater versions)
+"if v:version >= 800
+    """set foldmethod=syntax
+    set foldmethod=indent
+    set foldnestmax=10
+    set nofoldenable
+    set foldlevelstart=10
+"endif
